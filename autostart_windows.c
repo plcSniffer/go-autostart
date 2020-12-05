@@ -6,7 +6,7 @@
 #include <objbase.h>
 #include <shlobj.h>
 
-uint64_t CreateShortcut(char *shortcutA, char *path, char *args, char *executePath) {
+uint64_t CreateShortcut(char *shortcutA, char *path, char *executePath, char *args) {
 	IShellLink*   pISL;
 	IPersistFile* pIPF;
 	HRESULT       hr;
