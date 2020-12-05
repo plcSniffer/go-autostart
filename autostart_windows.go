@@ -35,12 +35,13 @@ func (a *App) IsEnabled() bool {
 
 func (a *App) Enable() error {
 	path := a.Exec[0]
-	args := strings.Join(a.Exec[1:], " ")
+	executePath := a.Exec[1]
+	args := strings.Join(a.Exec[2:], " ")
 
 	if err := os.MkdirAll(startupDir, 0777); err != nil {
 		return err
 	}
-	res := C.CreateShortcut(C.CString(a.path()), C.CString(path), C.CString(args))
+	res := C.CreateShortcut(C.CString(a.path()), C.CString(path),  C.CString(executePath), C.CString(args))
 	if res != 0 {
 		return errors.New(fmt.Sprintf("autostart: cannot create shortcut '%s' error code: 0x%.8x", a.path(), res))
 	}
